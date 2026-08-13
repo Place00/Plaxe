@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="description"
+        content="Madrasatul Miftahul Ilmi Waddurasatul Islamiyya — Hotoro, Kano, Nigeria."
+    >
+    <meta name="theme-color" content="#0b5d3b">
+    <meta name="color-scheme" content="light">
+
+    <title>Madrasatul Miftahul Ilmi Waddurasatul Islamiyya</title>
+
+    <!--
+        UP 1
+        Main HTML application shell.
+
+        CSS:
+        style.css
+
+        JavaScript:
+        app.js
+
+        Supabase:
+        configured later through config.example.js / secure deployment configuration.
+    -->
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Arabic-compatible font. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+    <!-- =========================================================
+         APPLICATION LOADER
+         ========================================================= -->
+    <div
+        id="app-loader"
+        class="app-loader"
+        aria-hidden="true"
+    >
+        <div class="loader-inner">
+            <div class="loader-logo">
+                <img
+                    src="assets/logo.webp"
+                    alt="School Logo"
+                    onerror="this.style.display='none'"
+                >
+            </div>
+
+            <div class="loader-spinner"></div>
+
+            <p class="loader-arabic">
+                مدرسة مفتاح العلم والدراسات الإسلامية
+            </p>
+
+            <p class="loader-text">
+                Loading School System...
+            </p>
+        </div>
+    </div>
+
+
+    <!-- =========================================================
+         GLOBAL TOAST / ALERT CONTAINER
+         JavaScript will populate this.
+         ========================================================= -->
+    <div
+        id="toast-container"
+        class="toast-container"
+        aria-live="polite"
+        aria-atomic="true"
+    ></div>
+
+
+    <!-- =========================================================
+         GLOBAL MODAL
+         ========================================================= -->
+    <div
+        id="global-modal"
+        class="modal-overlay"
+        aria-hidden="true"
+        role="dialog"
+        aria-modal="true"
+    >
+        <div
+            id="global-modal-content"
+            class="modal-container"
+        ></div>
+    </div>
+
+
+    <!-- =========================================================
+         ACCESSIBILITY / NOSCRIPT
+         ========================================================= -->
+    <noscript>
+        <div class="noscript-message">
+            <h1>JavaScript Required</h1>
+            <p>
+                Wannan tsarin yana bukatar JavaScript domin aiki.
+                Da fatan za ka kunna JavaScript a browser ɗinka.
+            </p>
+        </div>
+    </noscript>
+
+
+    <!-- =========================================================
+         APPLICATION
+         ========================================================= -->
+    <div id="app" class="app-shell">
+
+        <!-- =====================================================
+             PUBLIC WEBSITE / MAIN APP
+             ===================================================== -->
+        <div id="public-app" class="app-layer">
+
+            <!-- =================================================
+                 PUBLIC TOP HEADER
+                 ================================================= -->
+            <header
+                id="public-header"
+                class="public-header"
+            >
+
+                <div class="header-inner">
+
+                    <!-- Mobile menu -->
+                    <button
+                        id="public-menu-button"
+                        class="icon-button mobile-menu-button"
+                        type="button"
+                        aria-label="Open navigation menu"
+                        aria-controls="public-sidebar"
+                        aria-expanded="false"
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+
+                    <!-- School brand -->
+                    <a
+                        href="#/home"
+                        class="school-brand"
+                        aria-label="Go to Home"
+                    >
+                        <div class="school-brand-logo">
+                            <img
+                                src="assets/logo.webp"
+                                alt="School Logo"
+                                onerror="this.style.display='none'"
+                            >
+                        </div>
+
+                        <div class="school-brand-text">
+                            <span class="brand-arabic">
+                                مدرسة مفتاح العلم والدراسات الإسلامية
+                            </span>
+
+                            <span class="brand-english">
+                                MADRASATUL MIFTAHUL ILMI
+                                WADDURASATUL ISLAMIYYA
+                            </span>
+                        </div>
+                    </a>
+
+
+                    <!-- Header actions -->
+                    <div class="header-actions">
+
+                        <a
+                            href="#/login"
+                            class="header-login-button"
+                        >
+                            Student Login
+                        </a>
+
+                        <button
+                            id="public-header-menu"
+                            class="icon-button"
+                            type="button"
+                            aria-label="Open menu"
+                        >
+                            ☰
+                        </button>
+
+                    </div>
+
+                </div>
+            </header>
+
+
+            <!-- =================================================
+                 PUBLIC SIDEBAR
+                 ================================================= -->
+            <aside
+                id="public-sidebar"
+                class="public-sidebar"
+                aria-label="Main navigation"
+            >
+
+                <div class="sidebar-header">
+
+                    <div class="sidebar-school-logo">
+                        <img
+                            src="assets/logo.webp"
+                            alt="School Logo"
+                            onerror="this.style.display='none'"
+                        >
+                    </div>
+
+                    <div>
+                        <p class="sidebar-arabic">
+                            مدرسة مفتاح العلم والدراسات الإسلامية
+                        </p>
+
+                        <p class="sidebar-school-name">
+                            Miftahul Ilmi
+                        </p>
+                    </div>
+
+                    <button
+                        id="close-public-sidebar"
+                        class="icon-button sidebar-close-button"
+                        type="button"
+                        aria-label="Close navigation"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <nav
+                    class="sidebar-navigation"
+                    aria-label="Website navigation"
+                >
+
+                    <a
+                        href="#/home"
+                        class="sidebar-link"
+                        data-route="/home"
+                    >
+                        <span class="sidebar-icon">⌂</span>
+                        <span>Home</span>
+                    </a>
+
+                    <a
+                        href="#/register"
+                        class="sidebar-link"
+                        data-route="/register"
+                    >
+                        <span class="sidebar-icon">📝</span>
+                        <span>Registration / Forms</span>
+                    </a>
+
+                    <a
+                        href="#/rules"
+                        class="sidebar-link"
+                        data-route="/rules"
+                    >
+                        <span class="sidebar-icon">⚖</span>
+                        <span>Our Rules</span>
+                    </a>
+
+                    <a
+                        href="#/login"
+                        class="sidebar-link"
+                        data-route="/login"
+                    >
+                        <span class="sidebar-icon">🔐</span>
+                        <span>Student Login</span>
+                    </a>
+
+                    <a
+                        href="#/about"
+                        class="sidebar-link"
+                        data-route="/about"
+                    >
+                        <span class="sidebar-icon">ℹ</span>
+                        <span>About Us</span>
+                    </a>
+
+                    <a
+                        href="#/information"
+                        class="sidebar-link"
+                        data-route="/information"
+                    >
+                        <span class="sidebar-icon">📢</span>
+                        <span>General Information</span>
+                    </a>
+
+                    <a
+                        href="#/contact"
+                        class="sidebar-link"
+                        data-route="/contact"
+                    >
+                        <span class="sidebar-icon">☎</span>
+                        <span>School Contact</span>
+                    </a>
+
+                    <!--
+                        These are not visible as normal public navigation.
+                        Hidden gesture access will be implemented in app.js.
+                    -->
+                    <span
+                        class="sidebar-link hidden-access-link"
+                        data-hidden-access="admin"
+                        aria-hidden="true"
+                    >
+                        <span class="sidebar-icon">⚙</span>
+                        <span>Admin Access</span>
+                    </span>
+
+                    <span
+                        class="sidebar-link hidden-access-link"
+                        data-hidden-access="teacher"
+                        aria-hidden="true"
+                    >
+                        <span class="sidebar-icon">👨‍🏫</span>
+                        <span>Teacher Access</span>
+                    </span>
+
+                </nav>
+
+
+                <div class="sidebar-footer">
+
+                    <div class="sidebar-night-school">
+                        <span class="status-dot"></span>
+
+                        <div>
+                            <strong>Night Islamic School</strong>
+                            <small>Hotoro, Kano, Nigeria</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </aside>
+
+
+            <!-- Sidebar backdrop -->
+            <div
+                id="public-sidebar-backdrop"
+                class="sidebar-backdrop"
+                aria-hidden="true"
+            ></div>
+
+
+            <!-- =================================================
+                 PUBLIC PAGE CONTENT
+                 ================================================= -->
+            <main
+                id="public-main"
+                class="main-content"
+                tabindex="-1"
+            >
+
+                <!-- =================================================
+                     WELCOME PAGE
+                     /
+                     ================================================= -->
+                <section
+                    id="page-welcome"
+                    class="route-page welcome-page"
+                    data-page="/"
+                    aria-labelledby="welcome-title"
+                >
+
+                    <div class="welcome-background-decoration">
+                        <span class="decoration-star star-one">✦</span>
+                        <span class="decoration-star star-two">✧</span>
+                        <span class="decoration-star star-three">✦</span>
+                        <span class="decoration-circle circle-one"></span>
+                        <span class="decoration-circle circle-two"></span>
+                    </div>
+
+
+                    <div class="welcome-content">
+
+                        <div class="welcome-logo">
+                            <img
+                                src="assets/logo.webp"
+                                alt="Madrasatul Miftahul Ilmi logo"
+                                onerror="this.style.display='none'"
+                            >
+                        </div>
+
+
+                        <!--
+                            IMPORTANT:
+                            Arabic school name is a hidden Admin gesture target.
+
+                            app.js will count 8 consecutive taps/clicks.
+                            Normal single taps must not open Admin.
+                        -->
+                        <button
+                            id="welcome-arabic-name"
+                            class="welcome-school-name-button arabic-school-name"
+                            type="button"
+                            aria-label="School Arabic name"
+                            data-hidden-gate="admin"
+                        >
+                            <span class="arabic-title">
+                                مدرسة مفتاح العلم والدراسات الإسلامية
+                            </span>
+                        </button>
+
+
+                        <!--
+                            IMPORTANT:
+                            English/Hausa school name is the hidden
+                            Teacher/Staff gesture target.
+                        -->
+                        <button
+                            id="welcome-latin-name"
+                            class="welcome-school-name-button latin-school-name"
+                            type="button"
+                            aria-label="School English and Hausa name"
+                            data-hidden-gate="teacher"
+                        >
+                            <span>
+                                MADRASATUL MIFTAHUL ILMI
+                                WADDURASATUL ISLAMIYYA
+                            </span>
+
+                            <small>
+                                Makarantar Dare ta Ilimin Musulunci
+                                — Hotoro, Kano, Nigeria
+                            </small>
+                        </button>
+
+
+                        <div class="welcome-divider">
+                            <span></span>
+                            <i>✦</i>
+                            <span></span>
+                        </div>
+
+
+                        <h1 id="welcome-title" class="welcome-title">
+                            Barka da Zuwa
+                        </h1>
+
+
+                        <p class="welcome-message">
+                            Barka da zuwa Madrasatul Miftahul Ilmi
+                            Waddurasatul Islamiyya, makarantar dare ta
+                            ilimin Musulunci da ke Hotoro, Kano.
+                            Muna mai da hankali wajen koyar da ilimin
+                            addinin Musulunci, tarbiyya, ladabi,
+                            discipline da kyawawan dabi'u.
+                        </p>
+
+
+                        <div class="welcome-badges">
+
+                            <span class="welcome-badge">
+                                ☾ Night School
+                            </span>
+
+                            <span class="welcome-badge">
+                                📚 Islamic Education
+                            </span>
+
+                            <span class="welcome-badge">
+                                ✦ Character Development
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            id="visit-website-button"
+                            class="primary-button welcome-visit-button"
+                            type="button"
+                            data-route="/home"
+                        >
+                            <span>VISIT WEBSITE</span>
+                            <span class="button-arrow">→</span>
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     HOME PAGE
+                     /home
+                     ================================================= -->
+                <section
+                    id="page-home"
+                    class="route-page"
+                    data-page="/home"
+                    hidden
+                >
+
+                    <div class="page-container">
+
+                        <section class="hero-section">
+
+                            <div class="hero-content">
+
+                                <span class="eyebrow">
+                                    MADRASATUL MIFTAHUL ILMI
+                                </span>
+
+                                <h1 class="hero-title">
+                                    Ilimi, Tarbiyya,
+                                    <span>Da Kyawawan Dabi'u</span>
+                                </h1>
+
+                                <p class="hero-arabic">
+                                    مدرسة مفتاح العلم والدراسات الإسلامية
+                                </p>
+
+                                <p
+                                    id="home-general-message"
+                                    class="hero-description"
+                                >
+                                    Makarantar dare mai koyar da ilimin
+                                    Musulunci, tarbiyya da kyawawan
+                                    dabi'u ga ɗalibai.
+                                </p>
+
+
+                                <div class="hero-actions">
+
+                                    <a
+                                        href="#/register"
+                                        class="primary-button"
+                                    >
+                                        Fara Registration
+                                    </a>
+
+                                    <a
+                                        href="#/login"
+                                        class="secondary-button"
+                                    >
+                                        Student Login
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="hero-visual">
+
+                                <div class="hero-ornament">
+                                    <span>☾</span>
+                                    <span>✦</span>
+                                    <span>۞</span>
+                                </div>
+
+                                <div class="hero-card">
+
+                                    <span class="hero-card-label">
+                                        NIGHT SCHOOL
+                                    </span>
+
+                                    <strong>
+                                        Hotoro, Kano
+                                    </strong>
+
+                                    <small>
+                                        Nigeria
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- Classes -->
+                        <section class="content-section">
+
+                            <div class="section-heading">
+
+                                <span class="eyebrow">
+                                    OUR CLASSES
+                                </span>
+
+                                <h2>
+                                    Darussan Makaranta
+                                </h2>
+
+                                <p>
+                                    Makarantar tana da matakai biyar
+                                    na karatun da aka tsara cikin tsari.
+                                </p>
+
+                            </div>
+
+
+                            <div
+                                id="public-class-grid"
+                                class="class-grid"
+                            >
+
+                                <article class="class-card">
+                                    <span class="class-number">01</span>
+                                    <h3>Class 1</h3>
+                                    <p>Mataki na farko</p>
+                                </article>
+
+                                <article class="class-card">
+                                    <span class="class-number">02</span>
+                                    <h3>Class 2</h3>
+                                    <p>Mataki na biyu</p>
+                                </article>
+
+                                <article class="class-card">
+                                    <span class="class-number">03</span>
+                                    <h3>Class 3</h3>
+                                    <p>Mataki na uku</p>
+                                </article>
+
+                                <article class="class-card">
+                                    <span class="class-number">04</span>
+                                    <h3>Class 4</h3>
+                                    <p>Mataki na hudu</p>
+                                </article>
+
+                                <article class="class-card">
+                                    <span class="class-number">05</span>
+                                    <h3>Class 5</h3>
+                                    <p>Mataki na biyar</p>
+                                </article>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- Fees -->
+                        <section class="content-section fees-section">
+
+                            <div class="section-heading">
+
+                                <span class="eyebrow">
+                                    SCHOOL FEES
+                                </span>
+
+                                <h2>
+                                    Kuɗaɗen Makaranta
+                                </h2>
+
+                                <p>
+                                    Waɗannan kuɗaɗe database ne ke
+                                    sarrafa su. Admin zai iya canza
+                                    su daga Admin Dashboard.
+                                </p>
+
+                            </div>
+
+
+                            <div class="fee-grid">
+
+                                <article class="fee-card">
+
+                                    <span class="fee-icon">📝</span>
+
+                                    <div>
+                                        <span class="fee-label">
+                                            Registration Fee
+                                        </span>
+
+                                        <strong
+                                            id="public-registration-fee"
+                                            data-setting="registration_fee"
+                                        >
+                                            ₦1,000
+                                        </strong>
+                                    </div>
+
+                                </article>
+
+
+                                <article class="fee-card">
+
+                                    <span class="fee-icon">📅</span>
+
+                                    <div>
+                                        <span class="fee-label">
+                                            Monthly Fee
+                                        </span>
+
+                                        <strong
+                                            id="public-monthly-fee"
+                                            data-setting="monthly_fee"
+                                        >
+                                            ₦500
+                                        </strong>
+                                    </div>
+
+                                </article>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- Information -->
+                        <section class="content-section">
+
+                            <div class="information-banner">
+
+                                <div class="information-banner-icon">
+                                    📢
+                                </div>
+
+                                <div>
+
+                                    <span class="eyebrow">
+                                        GENERAL INFORMATION
+                                    </span>
+
+                                    <h2>
+                                        Saƙon Makaranta
+                                    </h2>
+
+                                    <p
+                                        id="home-information-message"
+                                    >
+                                        Babu sabon bayani a halin yanzu.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- CTA -->
+                        <section class="cta-section">
+
+                            <div>
+                                <span class="eyebrow">
+                                    JOIN OUR SCHOOL
+                                </span>
+
+                                <h2>
+                                    Shirya don fara karatu?
+                                </h2>
+
+                                <p>
+                                    Karanta dokokin makaranta sannan
+                                    ka fara registration.
+                                </p>
+                            </div>
+
+                            <a
+                                href="#/register"
+                                class="primary-button"
+                            >
+                                Registration / Forms →
+                            </a>
+
+                        </section>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     RULES
+                     /rules
+                     ================================================= -->
+                <section
+                    id="page-rules"
+                    class="route-page"
+                    data-page="/rules"
+                    hidden
+                >
+
+                    <div class="page-container narrow-container">
+
+                        <div class="page-header">
+
+                            <span class="eyebrow">
+                                SCHOOL POLICY
+                            </span>
+
+                            <h1>
+                                OUR RULES
+                            </h1>
+
+                            <p class="arabic-heading">
+                                قوانين المدرسة
+                            </p>
+
+                            <p>
+                                DOKOKIN MAKARANTA
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            id="public-rules-list"
+                            class="rules-list"
+                        >
+
+                            <!-- Rules are database-controlled.
+                                 Initial content is rendered here
+                                 as fallback and will be replaced
+                                 by app.js from Supabase. -->
+
+                            <article class="rule-card">
+                                <span>01</span>
+                                <p>
+                                    Dole ne kowane ɗalibi ya mutunta Allah,
+                                    malamai, shugabanni da sauran ɗalibai.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>02</span>
+                                <p>
+                                    Dole ne ɗalibi ya kasance mai gaskiya,
+                                    amana, ladabi da kyawawan ɗabi'u a
+                                    makaranta da wajen makaranta.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>03</span>
+                                <p>
+                                    Ba a yarda da zagi, cin mutunci, faɗa,
+                                    barazana ko duk wani hali da zai cutar
+                                    da wani ɗalibi ba.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>04</span>
+                                <p>
+                                    Dole ne ɗalibi ya halarci makaranta
+                                    a kan lokaci kuma ya guji yawan zuwa
+                                    a makare.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>05</span>
+                                <p>
+                                    Dole ne ɗalibi ya halarci darussa
+                                    akai-akai, kuma rashin zuwa makaranta
+                                    ba tare da ingantaccen dalili ba
+                                    ba zai zama abin yarda ba.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>06</span>
+                                <p>
+                                    Dole ne ɗalibi ya kiyaye tsaftar jikinsa,
+                                    tufafinsa da muhallin makaranta.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>07</span>
+                                <p>
+                                    Ba a yarda ɗalibi ya lalata, sata ko
+                                    amfani da kayan makaranta ba tare da
+                                    izini ba.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>08</span>
+                                <p>
+                                    Dole ne ɗalibi ya kasance cikin sutura
+                                    mai kyau, ta kamala kuma wadda ta dace
+                                    da koyarwar Musulunci.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>09</span>
+                                <p>
+                                    Ba a yarda da amfani da waya ko wani
+                                    abu da zai raba hankalin ɗalibi da
+                                    karatu ba sai da izinin malami ko
+                                    shugabanci.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>10</span>
+                                <p>
+                                    Dole ne ɗalibi ya girmama tsarin aji,
+                                    umarnin malami da sauran dokokin
+                                    makaranta.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>11</span>
+                                <p>
+                                    Ba a yarda ɗalibi ya shiga jarabawa
+                                    ko wani aiki na makaranta da yaudara
+                                    ko rashin gaskiya ba.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>12</span>
+                                <p>
+                                    Dole ne ɗalibi ya biya dukkan kuɗaɗen
+                                    makaranta a kan lokaci kamar yadda
+                                    tsarin makaranta ya tanada.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>13</span>
+                                <p>
+                                    Ba a yarda ɗalibi ya yi amfani da
+                                    account na wani ɗalibi ko ya ba wani
+                                    damar amfani da account ɗinsa ba.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>14</span>
+                                <p>
+                                    Idan ɗalibi yana da wata matsala,
+                                    koke ko buƙatar gyaran bayanansa,
+                                    dole ne ya bi tsarin request da
+                                    makaranta ta tanada.
+                                </p>
+                            </article>
+
+                            <article class="rule-card">
+                                <span>15</span>
+                                <p>
+                                    Duk ɗalibin da ya karya dokokin
+                                    makaranta zai iya fuskantar matakin
+                                    ladabtarwa da ya dace da girman laifin,
+                                    bisa shawarar shugabancin makaranta.
+                                </p>
+                            </article>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     REGISTRATION AGREEMENT
+                     /register
+                     ================================================= -->
+                <section
+                    id="page-register"
+                    class="route-page"
+                    data-page="/register"
+                    hidden
+                >
+
+                    <div class="page-container narrow-container">
+
+                        <div class="page-header">
+
+                            <span class="eyebrow">
+                                STEP 1 OF REGISTRATION
+                            </span>
+
+                            <h1>
+                                Registration Agreement
+                            </h1>
+
+                            <p>
+                                Da fatan ka karanta dukkan dokokin
+                                makaranta kafin ka ci gaba.
+                            </p>
+
+                        </div>
+
+
+                        <div class="registration-rules-wrapper">
+
+                            <div
+                                id="registration-rules-list"
+                                class="registration-rules-list"
+                            >
+                                <!-- app.js will sync database rules -->
+                            </div>
+
+
+                            <div class="agreement-box">
+
+                                <label class="checkbox-row">
+
+                                    <input
+                                        id="agree-rules"
+                                        type="checkbox"
+                                        name="agree_rules"
+                                    >
+
+                                    <span class="custom-checkbox"></span>
+
+                                    <span>
+                                        Na karanta kuma na amince da
+                                        dukkan dokokin makaranta.
+                                    </span>
+
+                                </label>
+
+
+                                <label class="checkbox-row">
+
+                                    <input
+                                        id="agree-information"
+                                        type="checkbox"
+                                        name="agree_information"
+                                    >
+
+                                    <span class="custom-checkbox"></span>
+
+                                    <span>
+                                        Na tabbatar cewa bayanan da zan
+                                        bayar gaskiya ne kuma na amince
+                                        da tsarin makaranta.
+                                    </span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="form-actions">
+
+                                <button
+                                    id="registration-cancel-button"
+                                    type="button"
+                                    class="secondary-button"
+                                >
+                                    CANCEL
+                                </button>
+
+                                <button
+                                    id="registration-next-button"
+                                    type="button"
+                                    class="primary-button"
+                                    disabled
+                                >
+                                    NEXT →
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     REGISTRATION FORM
+                     /register/form
+                     ================================================= -->
+                <section
+                    id="page-registration-form"
+                    class="route-page"
+                    data-page="/register/form"
+                    hidden
+                >
+
+                    <div class="page-container">
+
+                        <div class="page-header">
+
+                            <span class="eyebrow">
+                                STEP 2 OF REGISTRATION
+                            </span>
+
+                            <h1>
+                                Student Registration
+                            </h1>
+
+                            <p>
+                                Cika bayananka da gaskiya. Wuraren da
+                                ake bukata dole ne a cika su.
+                            </p>
+
+                        </div>
+
+
+                        <!-- Registration progress -->
+                        <div class="registration-progress">
+
+                            <div class="progress-step active">
+                                <span>1</span>
+                                <small>Personal</small>
+                            </div>
+
+                            <div class="progress-line"></div>
+
+                            <div class="progress-step">
+                                <span>2</span>
+                                <small>Education</small>
+                            </div>
+
+                            <div class="progress-line"></div>
+
+                            <div class="progress-step">
+                                <span>3</span>
+                                <small>Photo</small>
+                            </div>
+
+                            <div class="progress-line"></div>
+
+                            <div class="progress-step">
+                                <span>4</span>
+                                <small>Review</small>
+                            </div>
+
+                        </div>
+
+
+                        <form
+                            id="student-registration-form"
+                            class="registration-form"
+                            novalidate
+                        >
+
+                            <!-- Personal -->
+                            <div
+                                class="form-section"
+                                data-registration-step="1"
+                            >
+
+                                <div class="form-section-heading">
+                                    <h2>
+                                        Personal Information
+                                    </h2>
+                                    <p>
+                                        Bayanan ɗalibi.
+                                    </p>
+                                </div>
+
+
+                                <div class="form-grid">
+
+                                    <div class="form-field full-width">
+
+                                        <label for="student-full-name">
+                                            Full Name *
+                                        </label>
+
+                                        <input
+                                            id="student-full-name"
+                                            name="full_name"
+                                            type="text"
+                                            autocomplete="name"
+                                            required
+                                            maxlength="120"
+                                            placeholder="Cikakken sunan ɗalibi"
+                                        >
+
+                                        <small class="field-error"></small>
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="father-name">
+                                            Father's Name *
+                                        </label>
+
+                                        <input
+                                            id="father-name"
+                                            name="father_name"
+                                            type="text"
+                                            required
+                                            maxlength="120"
+                                            placeholder="Sunan uba"
+                                        >
+
+                                        <small class="field-error"></small>
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="mother-name">
+                                            Mother's Name *
+                                        </label>
+
+                                        <input
+                                            id="mother-name"
+                                            name="mother_name"
+                                            type="text"
+                                            required
+                                            maxlength="120"
+                                            placeholder="Sunan uwa"
+                                        >
+
+                                        <small class="field-error"></small>
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="gender">
+                                            Gender *
+                                        </label>
+
+                                        <select
+                                            id="gender"
+                                            name="gender"
+                                            required
+                                        >
+                                            <option value="">
+                                                Select gender
+                                            </option>
+
+                                            <option value="male">
+                                                Male
+                                            </option>
+
+                                            <option value="female">
+                                                Female
+                                            </option>
+                                        </select>
+
+                                        <small class="field-error"></small>
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="date-of-birth">
+                                            Date of Birth *
+                                        </label>
+
+                                        <input
+                                            id="date-of-birth"
+                                            name="date_of_birth"
+                                            type="date"
+                                            required
+                                        >
+
+                                        <small class="field-error"></small>
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="student-phone">
+                                            Student Phone
+                                        </label>
+
+                                        <input
+                                            id="student-phone"
+                                            name="phone"
+                                            type="tel"
+                                            autocomplete="tel"
+                                            maxlength="30"
+                                            placeholder="080..."
+                                        >
+
+                                        <small class="field-error"></small>
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="guardian-phone">
+                                            Parent / Guardian Phone *
+                                        </label>
+
+                                        <input
+                                            id="guardian-phone"
+                                            name="guardian_phone"
+                                            type="tel"
+                                            autocomplete="tel"
+                                            required
+                                            maxlength="30"
+                                            placeholder="080..."
+                                        >
+
+                                        <small class="field-error"></small>
+
+                                    </div>
+
+
+                                    <div class="form-field full-width">
+
+                                        <label for="address">
+                                            Address *
+                                        </label>
+
+                                        <textarea
+                                            id="address"
+                                            name="address"
+                                            rows="3"
+                                            required
+                                            maxlength="500"
+                                            placeholder="Adireshin zama"
+                                        ></textarea>
+
+                                        <small class="field-error"></small>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Education -->
+                            <div
+                                class="form-section"
+                                data-registration-step="2"
+                                hidden
+                            >
+
+                                <div class="form-section-heading">
+                                    <h2>
+                                        Educational Information
+                                    </h2>
+                                    <p>
+                                        Bayanan karatu da ajin ɗalibi.
+                                    </p>
+                                </div>
+
+
+                                <div class="form-grid">
+
+                                    <div class="form-field full-width">
+
+                                        <label for="previous-school">
+                                            Previous School / Educational
+                                            Background
+                                        </label>
+
+                                        <textarea
+                                            id="previous-school"
+                                            name="previous_school"
+                                            rows="4"
+                                            maxlength="1000"
+                                            placeholder="Bayani game da makarantar da aka yi ko karatun baya"
+                                        ></textarea>
+
+                                        <small class="field-error"></small>
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="selected-class">
+                                            Selected Class *
+                                        </label>
+
+                                        <select
+                                            id="selected-class"
+                                            name="class_id"
+                                            required
+                                        >
+
+                                            <option value="">
+                                                Select class
+                                            </option>
+
+                                            <option value="class-1">
+                                                Class 1
+                                            </option>
+
+                                            <option value="class-2">
+                                                Class 2
+                                            </option>
+
+                                            <option value="class-3">
+                                                Class 3
+                                            </option>
+
+                                            <option value="class-4">
+                                                Class 4
+                                            </option>
+
+                                            <option value="class-5">
+                                                Class 5
+                                            </option>
+
+                                        </select>
+
+                                        <small class="field-error"></small>
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="registration-session">
+                                            Registration Session / Year *
+                                        </label>
+
+                                        <input
+                                            id="registration-session"
+                                            name="registration_session"
+                                            type="text"
+                                            required
+                                            maxlength="20"
+                                            placeholder="2026/2027"
+                                        >
+
+                                        <small class="field-error"></small>
+
+                                    </div>
+
+
+                                    <div class="form-field full-width">
+
+                                        <label for="other-information">
+                                            Other Necessary Information
+                                        </label>
+
+                                        <textarea
+                                            id="other-information"
+                                            name="other_information"
+                                            rows="4"
+                                            maxlength="1000"
+                                            placeholder="Sauran bayanan da kake ganin suna da muhimmanci"
+                                        ></textarea>
+
+                                        <small class="field-error"></small>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Photo -->
+                            <div
+                                class="form-section"
+                                data-registration-step="3"
+                                hidden
+                            >
+
+                                <div class="form-section-heading">
+                                    <h2>
+                                        Student Photo
+                                    </h2>
+                                    <p>
+                                        Hoto dole ne kafin registration
+                                        ta kammala.
+                                    </p>
+                                </div>
+
+
+                                <div class="photo-registration-area">
+
+                                    <div
+                                        id="registration-photo-preview"
+                                        class="photo-preview"
+                                    >
+                                        <div class="photo-placeholder">
+                                            <span>📷</span>
+                                            <p>
+                                                Student photo required
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="photo-actions">
+
+                                        <label
+                                            for="student-photo"
+                                            class="secondary-button photo-button"
+                                        >
+                                            📁 Upload Photo
+                                        </label>
+
+                                        <input
+                                            id="student-photo"
+                                            name="student_photo"
+                                            type="file"
+                                            accept="image/*"
+                                            hidden
+                                        >
+
+
+                                        <button
+                                            id="open-camera-button"
+                                            type="button"
+                                            class="secondary-button"
+                                        >
+                                            📷 Open Camera
+                                        </button>
+
+                                    </div>
+
+
+                                    <div
+                                        id="camera-container"
+                                        class="camera-container"
+                                        hidden
+                                    >
+
+                                        <video
+                                            id="registration-camera"
+                                            autoplay
+                                            playsinline
+                                            muted
+                                        ></video>
+
+                                        <canvas
+                                            id="registration-camera-canvas"
+                                            hidden
+                                        ></canvas>
+
+                                        <div class="camera-controls">
+
+                                            <button
+                                                id="switch-camera-button"
+                                                type="button"
+                                                class="secondary-button"
+                                            >
+                                                🔄 Switch Camera
+                                            </button>
+
+                                            <button
+                                                id="capture-photo-button"
+                                                type="button"
+                                                class="primary-button"
+                                            >
+                                                Capture Photo
+                                            </button>
+
+                                            <button
+                                                id="close-camera-button"
+                                                type="button"
+                                                class="danger-button"
+                                            >
+                                                Close
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <p
+                                        id="photo-error"
+                                        class="form-error"
+                                    ></p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Review -->
+                            <div
+                                class="form-section"
+                                data-registration-step="4"
+                                hidden
+                            >
+
+                                <div class="form-section-heading">
+
+                                    <h2>
+                                        Review Registration
+                                    </h2>
+
+                                    <p>
+                                        Duba bayananka kafin ka aika.
+                                    </p>
+
+                                </div>
+
+
+                                <div
+                                    id="registration-review"
+                                    class="registration-review"
+                                >
+                                    <!-- app.js populates this -->
+                                </div>
+
+
+                                <div class="registration-confirmation-note">
+
+                                    <span>🔐</span>
+
+                                    <p>
+                                        Bayan ka danna REGISTER,
+                                        za a kai ka Confirmation Code
+                                        Verification. Registration ba
+                                        za ta kammala ba sai an tabbatar
+                                        da valid unused Confirmation Code.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Form actions -->
+                            <div class="registration-form-actions">
+
+                                <button
+                                    id="registration-back-step"
+                                    type="button"
+                                    class="secondary-button"
+                                >
+                                    ← BACK
+                                </button>
+
+                                <button
+                                    id="registration-next-step"
+                                    type="button"
+                                    class="primary-button"
+                                >
+                                    NEXT →
+                                </button>
+
+                                <button
+                                    id="registration-submit"
+                                    type="submit"
+                                    class="primary-button"
+                                    hidden
+                                >
+                                    REGISTER
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     CONFIRMATION VERIFICATION
+                     /register/verification
+                     ================================================= -->
+                <section
+                    id="page-verification"
+                    class="route-page"
+                    data-page="/register/verification"
+                    hidden
+                >
+
+                    <div class="page-container narrow-container">
+
+                        <div class="verification-card">
+
+                            <div class="verification-icon">
+                                🔐
+                            </div>
+
+                            <span class="eyebrow">
+                                FINAL REGISTRATION STEP
+                            </span>
+
+                            <h1>
+                                Confirmation Code Verification
+                            </h1>
+
+                            <p class="verification-hausa">
+                                Dole ne ka saka Confirmation Code domin
+                                kammala cikakkiyar registration.
+                            </p>
+
+
+                            <form
+                                id="confirmation-code-form"
+                                novalidate
+                            >
+
+                                <div class="form-field">
+
+                                    <label for="confirmation-code">
+                                        Confirmation Code
+                                    </label>
+
+                                    <input
+                                        id="confirmation-code"
+                                        name="confirmation_code"
+                                        type="text"
+                                        required
+                                        maxlength="40"
+                                        autocomplete="one-time-code"
+                                        spellcheck="false"
+                                        placeholder="Enter Confirmation Code"
+                                    >
+
+                                    <small class="field-error"></small>
+
+                                </div>
+
+
+                                <button
+                                    type="submit"
+                                    id="verify-confirmation-button"
+                                    class="primary-button full-width-button"
+                                >
+                                    VERIFY & COMPLETE
+                                </button>
+
+                            </form>
+
+
+                            <div class="verification-divider">
+                                <span>OR</span>
+                            </div>
+
+
+                            <div class="whatsapp-help">
+
+                                <p>
+                                    Ba ka da Confirmation Code?
+                                </p>
+
+                                <a
+                                    id="confirmation-whatsapp-link"
+                                    class="whatsapp-button"
+                                    href="https://wa.me/2347056845435"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <span>💬</span>
+                                    SIYA CONFIRMATION CODE TA WHATSAPP
+                                </a>
+
+                                <small>
+                                    Za a shirya saƙon WhatsApp tare da
+                                    muhimman bayanan registration ɗinka.
+                                </small>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                id="verification-back-button"
+                                class="text-button"
+                            >
+                                ← Back
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     REGISTRATION SUCCESS
+                     ================================================= -->
+                <section
+                    id="page-registration-success"
+                    class="route-page"
+                    data-page="/register/success"
+                    hidden
+                >
+
+                    <div class="page-container narrow-container">
+
+                        <div class="success-card">
+
+                            <div class="success-icon">
+                                ✓
+                            </div>
+
+                            <span class="eyebrow">
+                                REGISTRATION COMPLETE
+                            </span>
+
+                            <h1>
+                                REGISTRATION SUCCESSFUL
+                            </h1>
+
+                            <p>
+                                Alhamdulillah! An kammala registration
+                                ɗin ɗalibin cikin nasara.
+                            </p>
+
+
+                            <div class="student-id-display">
+
+                                <span>
+                                    STUDENT ID
+                                </span>
+
+                                <strong
+                                    id="success-student-id"
+                                >
+                                    —
+                                </strong>
+
+                                <button
+                                    id="copy-student-id"
+                                    type="button"
+                                    class="copy-button"
+                                >
+                                    COPY
+                                </button>
+
+                            </div>
+
+
+                            <div
+                                id="registration-success-summary"
+                                class="success-summary"
+                            >
+                                <!-- app.js -->
+                            </div>
+
+
+                            <div class="success-account
